@@ -23,17 +23,7 @@ spec:
           name: docker-sock
         - mountPath: /tmp/trivycache/
           name: trivycache
-    - name: trufflehog
-      image: rmkanda/trufflehog
-      command:
-        - cat
-      tty: true
-    - name: licensefinder
-      image: licensefinder/license_finder
-      command:
-        - cat
-      tty: true
-      
+          
     - name: kaniko
       image: gcr.io/kaniko-project/executor:v1.6.0-debug
       imagePullPolicy: Always
@@ -44,6 +34,18 @@ spec:
       volumeMounts:
         - name: jenkins-docker-cfg
           mountPath: /kaniko/.docker  
+
+    - name: trufflehog
+      image: rmkanda/trufflehog
+      command:
+        - cat
+      tty: true
+    - name: licensefinder
+      image: licensefinder/license_finder
+      command:
+        - cat
+      tty: true
+       
   volumes:
     - name: m2
       hostPath:
